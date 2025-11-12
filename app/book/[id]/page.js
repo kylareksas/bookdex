@@ -40,7 +40,11 @@ export default function BookDetailPage() {
   const id = params?.id;
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [template, setTemplate] = useState('classic');
+  
+  // --- ¡CAMBIO AQUÍ! ---
+  // El valor por defecto ahora es 'pixel'
+  const [template, setTemplate] = useState('pixel'); 
+  
   const [feedback, setFeedback] = useState(''); 
 
   const sheetRef = useRef(null);
@@ -67,7 +71,7 @@ export default function BookDetailPage() {
     }
   }, [id]);
 
-  // --- ¡¡AQUÍ ESTÁ EL CÓDIGO QUE FALTABA!! ---
+  // --- Funciones de los Botones ---
 
   const handleDownload = () => {
     if (!sheetRef.current) return;
@@ -109,7 +113,7 @@ export default function BookDetailPage() {
     }
   };
 
-  // --- FIN DEL CÓDIGO QUE FALTABA ---
+  // --- Fin Funciones de los Botones ---
 
 
   if (loading) return <p style={{ textAlign: 'center', padding: '50px' }}>Cargando ficha...</p>;
@@ -148,7 +152,6 @@ export default function BookDetailPage() {
         </div>
 
         <div style={{ display: 'flex' }}>
-          {/* Estos botones ahora funcionarán */}
           <button onClick={handleCopyLink} style={buttonStyle}>Copiar Enlace</button>
           <button onClick={handleShare} style={buttonStyle}>Compartir</button>
           <button onClick={handleDownload} style={primaryButtonStyle}>Descargar Imagen</button>

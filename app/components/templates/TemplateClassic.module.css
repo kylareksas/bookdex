@@ -1,0 +1,81 @@
+/* Contenido para app/components/templates/TemplateClassic.module.css */
+
+.sheet {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  max-width: 800px;
+  margin: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #333;
+}
+
+/* El header ahora contiene la imagen y los detalles */
+.header {
+  display: flex;
+  flex-wrap: wrap; /* Para móviles */
+  gap: 24px;
+  padding: 24px;
+  background: #f9f9f9;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* ESTILO DE LA IMAGEN (Arregla tu problema) */
+.cover {
+  width: 180px; /* Tamaño fijo */
+  height: 260px; /* Tamaño fijo */
+  object-fit: cover; /* Rellena el espacio sin deformar */
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #eee; /* Color de fondo mientras carga */
+}
+
+/* Contenedor de la info (Título + Detalles) */
+.headerInfo {
+  flex: 1; /* Ocupa el espacio restante */
+  min-width: 250px; /* Para que no se encoja demasiado */
+}
+
+.title {
+  font-size: 2rem;
+  margin: 0 0 5px 0;
+}
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #555;
+  margin: 0 0 10px 0;
+}
+.author {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 20px; /* Espacio antes de los detalles */
+}
+
+/* ESTILOS DE LOS DETALLES */
+.details {
+  font-size: 0.9rem;
+}
+.details h3 {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+  margin-top: 0;
+}
+.details p {
+  margin: 5px 0;
+}
+
+/* El cuerpo ahora SOLO es la descripción */
+.body {
+  padding: 24px;
+}
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.description h3 {
+  margin-top: 0;
+}

@@ -1,0 +1,172 @@
+/* ¡Importante! Asegúrate de que app/globals.css 
+   sigue teniendo el @import de 'Press Start 2P' */
+
+.pokedexCase {
+  font-family: 'Press Start 2P', cursive;
+  background: #c00; /* Rojo */
+  border: 4px solid #333;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 600px; /* Ancho máximo */
+  margin: auto;
+  box-shadow: 5px 5px 0 #333;
+}
+.screen {
+  background: #aaa; /* Gris pantalla */
+  padding: 15px;
+  border-radius: 5px;
+  border: 2px solid #333;
+}
+.screenContent {
+  background: #eee; /* Blanco pantalla interna */
+  border: 2px solid #333;
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+}
+.cover {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  border: 2px solid #333;
+  image-rendering: pixelated;
+  background-color: #ccc; /* Fondo para placeholder */
+}
+.data {
+  flex: 1;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #333; /* Color del texto principal */
+}
+.title {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.description {
+  background: #eee;
+  border: 2px solid #333;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 10px;
+  line-height: 1.5;
+  
+  height: 160px; /* Altura de la descripción */
+  overflow-y: auto; /* Permite desplazamiento si hay mucho texto */
+
+  color: #333; 
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #555 #ccc; /* Firefox */
+}
+.description::-webkit-scrollbar {
+  width: 8px;
+}
+.description::-webkit-scrollbar-track {
+  background: #ccc;
+  border-radius: 4px;
+}
+.description::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+
+.controls {
+  padding-top: 20px;
+  display: flex;
+  /* --- ¡CAMBIO: Alinear ítems para centrar el texto y empujar botones! --- */
+  align-items: center; 
+  justify-content: space-between; /* Mantén el espacio entre los 3 elementos */
+  gap: 10px; /* Espacio entre los elementos */
+}
+
+/* --- ¡ESTILO ACTUALIZADO PARA EL TEXTO "Book-Dex"! --- */
+.brand {
+  font-size: 14px;
+  color: #333;
+  flex-grow: 1; /* Permite que el texto ocupe el espacio central disponible */
+  text-align: center; /* Centra el texto */
+}
+
+/* --- ¡ESTILO ACTUALIZADO PARA EL D-PAD (Cruz)! --- */
+.dpad {
+  width: 60px; 
+  height: 60px; 
+  background: #333;
+  position: relative;
+  border-radius: 8px; 
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; /* <-- Añadido: para que parezca clicable */
+
+  /* --- ¡LÍNEA AÑADIDA PARA LA ANIMACIÓN! --- */
+  transition: transform 0.3s ease-in-out; 
+}
+.dpad:active {
+  background: #444; /* <-- Añadido: pequeño efecto al pulsar */
+}
+
+.dpad::before, .dpad::after {
+  content: '';
+  position: absolute;
+  background: #333;
+  border-radius: 2px; 
+}
+.dpad::before { 
+  width: 80px; 
+  height: 15px; 
+  left: -10px; 
+  top: 50%; 
+  transform: translateY(-50%); 
+}
+.dpad::after { 
+  width: 15px; 
+  height: 80px; 
+  left: 50%; 
+  top: -10px; 
+  transform: translateX(-50%); 
+}
+.dpad::before {
+    box-shadow: 0 0 0 5px #333 inset; 
+}
+
+
+/* --- ESTILOS PARA LOS BOTONES A y B (sin cambios de posicionamiento, ya están a la derecha) --- */
+.actionButtons {
+  display: flex;
+  gap: 15px; /* Espacio entre los botones A y B */
+  /* Los quitamos para que el `justify-content: space-between;` de .controls los empuje a la derecha */
+  /* margin-left: auto; */ 
+  /* margin-right: 15px; */ 
+}
+
+.button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Botones circulares */
+  border: 2px solid #333;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #333; /* Sombra para dar efecto 3D */
+  transition: all 0.05s ease; /* Pequeña animación al pulsar */
+}
+
+.button:active {
+  box-shadow: 1px 1px 0 #333; /* Se "hunde" al pulsar */
+  transform: translate(1px, 1px);
+}
+
+.buttonA {
+  background-color: #ffeb3b; /* Amarillo */
+}
+
+.buttonB {
+  background-color: #4caf50; /* Verde */
+}

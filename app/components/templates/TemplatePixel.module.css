@@ -44,6 +44,8 @@
   margin-bottom: 10px;
   text-transform: uppercase;
 }
+
+/* --- ¡CAMBIOS EN LA DESCRIPCIÓN! --- */
 .description {
   background: #eee;
   border: 2px solid #333;
@@ -51,11 +53,16 @@
   padding: 10px;
   font-size: 10px;
   line-height: 1.5;
-  
-  height: 160px; /* Altura de la descripción */
-  overflow-y: auto; /* Permite desplazamiento si hay mucho texto */
-
   color: #333; 
+
+  /* ¡Altura automática! */
+  height: auto; 
+  /* Le damos una altura máxima para que no se haga gigante */
+  max-height: 200px; 
+  /* Y si se pasa, aparece el scroll */
+  overflow-y: auto; 
+
+  /* Estilos de la barra de scroll */
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: #555 #ccc; /* Firefox */
 }
@@ -70,15 +77,15 @@
   background: #555;
   border-radius: 4px;
 }
+/* --- FIN DE CAMBIOS EN LA DESCRIPCIÓN --- */
 
 
 .controls {
   padding-top: 20px;
   display: flex;
-  /* --- ¡CAMBIO: Alinear ítems para centrar el texto y empujar botones! --- */
   align-items: center; 
-  justify-content: space-between; /* Mantén el espacio entre los 3 elementos */
-  gap: 10px; /* Espacio entre los elementos */
+  justify-content: space-between; 
+  gap: 10px; 
 }
 
 /* --- ¡ESTILO ACTUALIZADO PARA EL TEXTO "Book-Dex"! --- */

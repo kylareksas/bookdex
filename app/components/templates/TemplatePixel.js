@@ -1,10 +1,13 @@
 import styles from './TemplatePixel.module.css';
-import { useState } from 'react'; // <-- ¡IMPORTANTE! Importa useState
+import { useState } from 'react'; 
 
 export default function TemplatePixel({ book }) {
-  const shortDescription = book.description ? 
-    book.description.replace(/<[^>]+>/g, '').substring(0, 300) + '...' : 
-    'No hay descripción.';
+  
+  // --- ¡CAMBIO AQUÍ! ---
+  // Ya no acortamos la descripción. Solo la limpiamos de HTML.
+  const cleanDescription = book.description 
+    ? book.description.replace(/<[^>]+>/g, '') 
+    : 'No hay descripción disponible.';
 
   const [rotation, setRotation] = useState(0);
 
@@ -19,18 +22,13 @@ export default function TemplatePixel({ book }) {
   };
 
   const handleDpadClick = () => {
-    // Suma 90 grados a la rotación anterior
     setRotation(prevRotation => prevRotation + 90);
-    
-    // --- ¡LÍNEA AÑADIDA! ---
-    // (Asegúrate de tener 'rueda.mp3' en tu carpeta /public)
     playSound('/rueda.mp3'); 
   };
 
   return (
     <div className={styles.pokedexCase}>
       <div className={styles.screen}>
-        {/* ... (el resto de tu pantalla no cambia) ... */}
         <div className={styles.screenContent}>
           <img 
             src={`/api/image-proxy?url=${encodeURIComponent(book.imageUrl)}`} 
@@ -41,35 +39,34 @@ export default function TemplatePixel({ book }) {
             <p className={styles.title}>{book.title}</p>
             <p>AUTOR: {book.authors?.join(', ') || '??'}</p>
             <p>PÁGINAS: {book.pageCount || '??'}</p>
-            
             <p style={{ marginTop: '10px' }}>EDITORIAL: {book.publisher || '??'}</p>
             <p>FECHA: {book.publishedDate || '??'}</p>
           </div>
         </div>
         <div className={styles.description}>
-          <p>{shortDescription}</p>
+          {/* --- ¡CAMBIO AQUÍ! --- */}
+          {/* Ahora usamos la descripción completa y limpia */}
+          <p>{cleanDescription}</p> 
         </div>
       </div>
       <div className={styles.controls}>
-        
         <div 
           className={styles.dpad}
-          onClick={handleDpadClick} // <-- Esto llama a la función de arriba
+          onClick={handleDpadClick}
           style={{ transform: `rotate(${rotation}deg)` }}
         >
         </div>
-        
         <p className={styles.brand}>Book-Dex</p> 
         <div className={styles.actionButtons}>
           <button 
             className={`${styles.button} ${styles.buttonA}`}
-            onClick={() => playSound('/clicA.mp3')} 
+            onClick={() => playSound('/click-A.mp3')} 
           >
             A
           </button>
           <button 
             className={`${styles.button} ${styles.buttonB}`}
-            onClick={() => playSound('/clicB.mp3')}
+            onClick={() => playSound('/click-B.mp3')}
           >
             B
           </button>

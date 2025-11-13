@@ -1,0 +1,61 @@
+.scroll {
+  font-family: 'Cinzel', serif;
+  /* ¡USA LA IMAGEN DE FONDO! */
+  background-image: url('/parchment.jpg'); 
+  background-size: cover;
+  color: #5c3d2e;
+  border: 2px solid #8c6d5e;
+  border-radius: 5px;
+  padding: 40px 50px;
+  max-width: 800px;
+  margin: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 0;
+  font-weight: 700;
+  border-bottom: 3px double #8c6d5e;
+  padding-bottom: 10px;
+}
+.author {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  font-style: italic;
+}
+.content {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+}
+.cover {
+  width: 180px;
+  height: 260px;
+  object-fit: contain;
+  border: 1px solid #8c6d5e;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.details {
+  flex: 1;
+  font-size: 1rem;
+}
+.details h3 {
+  margin-top: 0;
+  font-weight: 700;
+}
+.details p {
+  margin: 5px 0;
+}
+.description {
+  margin-top: 30px;
+  border-top: 1px solid #8c6d5e;
+  padding-top: 20px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+.description h3 {
+  font-weight: 700;
+}

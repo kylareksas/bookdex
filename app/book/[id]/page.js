@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link'; 
 import html2canvas from 'html2canvas';
 
-// --- ¡NUEVAS IMPORTACIONES! ---
+// Importaciones de todas las plantillas
 import TemplateClassic from '../../components/templates/TemplateClassic';
 import TemplatePixel from '../../components/templates/TemplatePixel';
 import TemplateSciFi from '../../components/templates/TemplateSciFi';
@@ -21,7 +21,7 @@ const buttonStyle = {
   border: '1px solid #ccc',
   cursor: 'pointer',
   margin: '0 5px',
-  fontSize: '0.9rem', // Tamaño de fuente unificado
+  fontSize: '0.9rem',
 };
 
 const primaryButtonStyle = {
@@ -43,12 +43,9 @@ const disabledButtonStyle = {
 export default function BookDetailPage() {
   const params = useParams();
   const id = params?.id;
-  const [book, setBook] = useState(null);
-  const [loading, setLoading] = useState(true);
-  
-  // Sigue en 'pixel' por defecto, como pediste
+  const [book, setBook] = useState(null); // <-- EMPIEZA COMO NULL
+  const [loading, setLoading] = useState(true); // <-- EMPIEZA COMO TRUE
   const [template, setTemplate] = useState('pixel'); 
-  
   const [feedback, setFeedback] = useState(''); 
   const sheetRef = useRef(null);
 
@@ -74,15 +71,69 @@ export default function BookDetailPage() {
     }
   }, [id]);
 
-  // --- Funciones de los Botones (sin cambios) ---
-  const handleDownload = () => { /* ...tu código... */ };
-  const handleCopyLink = () => { /* ...tu código... */ };
-  const handleShare = () => { /* ...tu código... */ };
-  // (Asegúrate de que las funciones completas de antes están aquí)
-  
-  // (Código de if loading / if !book sin cambios)
-  // ...
+  // --- Funciones de los Botones ---
 
+  const handleDownload = () => {
+    if (!sheetRef.current) return;
+    setFeedback('Descargando...');
+    
+    html2canvas(sheetRef.current, { 
+      useCORS: true, 
+      scale: 2 
+    }).then((canvas) => {
+      const link = document.createElement('a');
+      link.download = `${book.title.replace(/ /g, '_')}_ficha.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      setFeedback('¡Descargado!');
+      setTimeout(() => setFeedback(''), 2000);
+    });
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setFeedback('¡Enlace copiado!');
+    setTimeout(() => setFeedback(''), 2000);
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Ficha de ${book.title}`,
+          text: `Mira la ficha de ${book.title} que he creado:`,
+          url: window.location.href,
+        });
+      } catch (error) {
+        console.error('Error al compartir', error);
+      }
+    } else {
+      handleCopyLink();
+    }
+  };
+
+  // --- ¡¡AQUÍ ESTÁ LA SOLUCIÓN!! ---
+  // Estas líneas se ejecutan antes del return principal.
+
+  // 1. Si está cargando, muestra "Cargando..." y no sigue.
+  if (loading) {
+    return <p style={{ textAlign: 'center', padding: '50px' }}>Cargando ficha...</p>;
+  }
+
+  // 2. Si terminó de cargar y el libro sigue siendo null (error), muestra "Error..." y no sigue.
+  if (!book) {
+    return (
+      <div style={{ textAlign: 'center', padding: '50px' }}>
+        <p>Error: Libro no encontrado.</p>
+        <Link href="/">← Volver al buscador</Link>
+      </div>
+    );
+  }
+
+  // --- FIN DE LA SOLUCIÓN ---
+
+  // Si el código llega aquí, significa que 'loading' es false Y 'book' es un objeto válido.
+  // Ahora es seguro renderizar las plantillas.
   return (
     <div style={{ padding: '20px', maxWidth: '1000px', margin: 'auto' }}>
       
@@ -90,12 +141,10 @@ export default function BookDetailPage() {
         ← Volver al buscador
       </Link>
 
-      {/* --- ¡SECCIÓN DE CONTROLES ACTUALIZADA! --- */}
       <div style={{ marginBottom: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '10px' }}>
         
         <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
           <label style={{ marginRight: '10px' }}>Elegir plantilla: </label>
-          {/* Botón Clásica */}
           <button 
             onClick={() => setTemplate('classic')} 
             disabled={template === 'classic'}
@@ -103,7 +152,6 @@ export default function BookDetailPage() {
           >
             Clásica
           </button>
-          {/* Botón Pixel */}
           <button 
             onClick={() => setTemplate('pixel')} 
             disabled={template === 'pixel'}
@@ -111,7 +159,6 @@ export default function BookDetailPage() {
           >
             Pixel
           </button>
-          {/* ¡NUEVO! Botón Sci-Fi */}
           <button 
             onClick={() => setTemplate('scifi')} 
             disabled={template === 'scifi'}
@@ -119,7 +166,6 @@ export default function BookDetailPage() {
           >
             Sci-Fi
           </button>
-          {/* ¡NUEVO! Botón Fantasía */}
           <button 
             onClick={() => setTemplate('fantasy')} 
             disabled={template === 'fantasy'}
@@ -127,7 +173,6 @@ export default function BookDetailPage() {
           >
             Fantasía
           </button>
-          {/* ¡NUEVO! Botón Cómic */}
           <button 
             onClick={() => setTemplate('comic')} 
             disabled={template === 'comic'}
@@ -146,7 +191,6 @@ export default function BookDetailPage() {
       </div>
       {feedback && <p style={{ color: 'green', textAlign: 'center' }}>{feedback}</p>}
 
-      {/* --- ¡SECCIÓN DE RENDERIZADO ACTUALIZADA! --- */}
       <div ref={sheetRef}>
         {template === 'classic' && <TemplateClassic book={book} />}
         {template === 'pixel' && <TemplatePixel book={book} />}

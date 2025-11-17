@@ -79,3 +79,36 @@
 .description h3 {
   margin-top: 0;
 }
+
+@media (max-width: 600px) {
+  .sheet {
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .header {
+    flex-direction: column; /* Imagen arriba, datos abajo */
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .cover {
+    width: 140px;
+    height: auto;
+    margin-bottom: 15px; /* Espacio entre imagen y texto */
+  }
+
+  .headerInfo {
+    width: 100%; /* Que ocupe todo el ancho */
+  }
+
+  .title {
+    font-size: 1.5rem; /* Título más pequeño */
+  }
+
+  .body {
+    grid-template-columns: 1fr; /* Una sola columna para descripción */
+    padding: 15px;
+  }
+}

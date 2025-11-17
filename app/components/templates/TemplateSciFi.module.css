@@ -79,3 +79,26 @@
   font-size: 1rem;
   text-transform: uppercase;
 }
+
+@media (max-width: 600px) {
+  .hud {
+    max-width: 95%;
+    padding: 10px;
+  }
+  
+  .content {
+    flex-direction: column; /* Columna vertical */
+    align-items: center;
+  }
+
+  .cover {
+    width: 120px;
+    height: 180px;
+    margin-bottom: 15px;
+  }
+
+  .details {
+    text-align: center;
+    font-size: 0.8rem;
+  }
+}

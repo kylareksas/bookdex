@@ -177,3 +177,43 @@
 .buttonB {
   background-color: #4caf50; /* Verde */
 }
+
+/* --- RESPONSIVE: MÓVILES --- */
+@media (max-width: 600px) {
+  .pokedexCase {
+    width: 95%;       /* Que no ocupe 600px fijos, sino el 95% de la pantalla */
+    padding: 10px;    /* Menos relleno */
+  }
+
+  .screenContent {
+    flex-direction: column; /* Imagen arriba, texto abajo */
+    align-items: center;    /* Centrado */
+    text-align: center;
+  }
+
+  .cover {
+    width: 80px;      /* Imagen un poco más pequeña */
+    height: 120px;
+    margin-bottom: 10px;
+  }
+
+  .data {
+    font-size: 9px;   /* Letra un pelín más pequeña */
+    width: 100%;
+  }
+
+  .controls {
+    flex-direction: column; /* Controles uno debajo de otro si hace falta */
+    gap: 20px;
+  }
+
+  .brand {
+    order: -1; /* Pone el nombre "Book-Dex" arriba del todo en los controles */
+    margin-bottom: 10px;
+  }
+  
+  .actionButtons {
+    margin: 0; /* Quita márgenes extraños */
+    justify-content: center;
+  }
+}

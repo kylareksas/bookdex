@@ -1,12 +1,11 @@
 // app/components/SearchResults.js
 
-'use client'; // Sigue siendo un Client Component
+'use client'; 
 
 import { useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-// Lo hemos renombrado de SearchPage a SearchResults
 export default function SearchResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q');
@@ -14,7 +13,6 @@ export default function SearchResults() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // El 'if (query)' es importante
     if (query) {
       setLoading(true);
       fetch(`/api/search?q=${query}`)
@@ -24,31 +22,41 @@ export default function SearchResults() {
           setLoading(false);
         });
     } else {
-      setLoading(false); // Si no hay query, no hay nada que cargar
+      setLoading(false);
     }
   }, [query]);
 
-  // Si no hay query, no mostramos nada
   if (!query) {
-    return <p>Escribe algo en el buscador para empezar.</p>;
+    return <p style={{ padding: '20px' }}>Escribe algo en el buscador para empezar.</p>;
   }
   
-  // El JSX es el mismo que tenías, pero sin el "Volver"
   return (
-    <div>
-      <h1 style={{ marginTop: '20px' }}>Resultados para: "{query}"</h1>
+    // --- CAMBIO 1: Añadido padding y maxWidth para que no se desparrame en PC ---
+    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
+      
+      <h1 style={{ marginTop: '10px', fontSize: '1.5rem' }}>Resultados para: "{query}"</h1>
+      
       {loading ? (
         <p>Buscando...</p>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '20px' }}>
+        // --- CAMBIO 2: Ajuste de Grid para móviles ---
+        <div style={{ 
+          display: 'grid', 
+          // Bajamos a 140px para asegurar 2 columnas en móviles estándar
+          gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', 
+          gap: '15px', // Espacio un poco más compacto
+          marginTop: '20px'
+        }}>
           {books.length > 0 ? books.map((book) => (
-            <Link key={book.id} href={`/book/${book.id}`} style={{ textDecoration: 'none', color: 'inherit', border: '1px solid #ddd', padding: '10px', borderRadius: '8px', textAlign: 'center' }}>
+            <Link key={book.id} href={`/book/${book.id}`} style={{ textDecoration: 'none', color: 'inherit', border: '1px solid #ddd', padding: '10px', borderRadius: '8px', textAlign: 'center', background: '#fff' }}>
               <img 
                 src={`/api/image-proxy?url=${encodeURIComponent(book.imageUrl)}`} 
                 alt={book.title} 
-                style={{ width: '100%', height: '180px', objectFit: 'cover', backgroundColor: '#eee' }} 
+                style={{ width: '100%', height: '180px', objectFit: 'cover', backgroundColor: '#eee', borderRadius: '4px' }} 
               />
-              <h3 style={{ fontSize: '0.9rem', marginTop: '10px' }}>{book.title}</h3>
+              <h3 style={{ fontSize: '0.9rem', marginTop: '10px', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical' }}>
+                {book.title}
+              </h3>
               <p style={{ fontSize: '0.8rem', color: '#666' }}>{book.authors[0]}</p>
             </Link>
           )) : <p>No se encontraron resultados.</p>}

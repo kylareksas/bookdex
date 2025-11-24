@@ -60,13 +60,13 @@ export default function TemplatePixel({ book }) {
         <div className={styles.actionButtons}>
           <button 
             className={`${styles.button} ${styles.buttonA}`}
-            onClick={() => playSound('/click-A.mp3')} 
+            onClick={() => playSound('/clicA.mp3')} 
           >
             A
           </button>
           <button 
             className={`${styles.button} ${styles.buttonB}`}
-            onClick={() => playSound('/click-B.mp3')}
+            onClick={() => playSound('/clicB.mp3')}
           >
             B
           </button>

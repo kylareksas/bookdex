@@ -1,5 +1,3 @@
-// app/components/SearchBar.js
-
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -18,9 +16,9 @@ export default function SearchBar() {
     <form onSubmit={handleSearch} style={{ 
       display: 'flex', 
       gap: '10px', 
-      width: '100%',           // Ocupa todo el ancho disponible
-      maxWidth: '500px',       // Pero no más de 500px
-      flexWrap: 'wrap',        // Si es muy pequeño, baja el botón
+      width: '100%',           
+      maxWidth: '500px',       
+      flexWrap: 'wrap',        
       justifyContent: 'center' 
     }}>
       <input
@@ -31,8 +29,8 @@ export default function SearchBar() {
         style={{ 
           padding: '12px', 
           fontSize: '1rem', 
-          flex: 1,             // Crece para ocupar el espacio
-          minWidth: '200px',   // Ancho mínimo
+          flex: 1,             
+          minWidth: '200px',   
           borderRadius: '8px',
           border: '1px solid #ccc'
         }}
